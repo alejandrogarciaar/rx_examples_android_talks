@@ -60,6 +60,7 @@ class PublishSubjectTest {
         mySubject.update("Luke")
         mySubject.update("Leia")
 
+        // Avoiding Leaks
         disposable.dispose()
     }
 }
