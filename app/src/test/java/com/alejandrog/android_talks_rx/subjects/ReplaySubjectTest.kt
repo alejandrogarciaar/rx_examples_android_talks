@@ -13,20 +13,30 @@ class ReplaySubjectTest {
     @Test
     fun testPublishSubject() {
         val mySubject = MyReplaySubject()
+
         val observerOne = MyCustomObserver("Alumno 1")
         val observerTwo = MyCustomObserver("Alumno 2")
         val observerThree = MyCustomObserver("Alumno 3")
 
         mySubject.addObserver(observerOne)
+
         mySubject.update("Topic 1")
         mySubject.update("Topic 2")
         mySubject.update("Topic 3")
+
         mySubject.addObserver(observerTwo)
+
         mySubject.update("Topic 4")
         mySubject.update("Topic 5")
+
         mySubject.addObserver(observerThree)
+
         mySubject.update("Topic 6")
         mySubject.update("Topic 7")
+
+        mySubject.complete()
+
+        mySubject.update("Topic 8")
     }
 
     @Test
@@ -70,5 +80,9 @@ private class MyReplaySubject {
 
     fun update(item: String) {
         subject.onNext(item)
+    }
+
+    fun complete() {
+        subject.onComplete()
     }
 }
